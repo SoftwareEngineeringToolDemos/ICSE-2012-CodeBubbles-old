@@ -2,7 +2,7 @@
 
 ***
 
-This repository is contains information related to the tool Code Bubbles. The tool was originally presented in [this paper](http://dl.acm.org/citation.cfm?id=2337432).
+This repository contains information related to the tool Code Bubbles. The tool was originally presented in [this paper](http://dl.acm.org/citation.cfm?id=2337432).
 
 This repository _is not_ the original repository for this tool. Here are some links to the original project:
 * [The Official Project Page, including source code](http://cs.brown.edu/people/spr/codebubbles/)
