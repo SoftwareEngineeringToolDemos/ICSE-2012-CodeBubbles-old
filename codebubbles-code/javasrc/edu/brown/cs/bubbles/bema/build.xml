@@ -1,0 +1,788 @@
+<project name='bubbles.bema' default='compile'>
+
+   <property file='../../../../../../build.properties' />
+   <property name='PRO' value='/pro' />
+   <property name='BUBBLES' value='/pro/bubbles' />
+   <available file="${PRO}/ivy" type="dir" property="ivy.present" />
+   <target name="init1" if="ivy.present" >
+      <property name='IVYBIN' value='${PRO}/ivy/java' />
+      <property name='IVYJAR1' value='${PRO}/ivy/java' />
+      <property name='IVYJAR2' value='**/*.class' />
+   </target>
+   <target name="init2" unless="ivy.present" >
+      <property name='IVYBIN' value='${BUBBLES}/lib/ivy.jar' />
+      <property name='IVYJAR1' value='${BUBBLES}/lib' />
+      <property name='IVYJAR2' value='ivy.jar' />
+   </target>
+   <target name='init' depends='init1,init2' >
+      <path id='bubbles.classpath'>
+	 <pathelement location='${BUBBLES}/java' />
+	 <pathelement location='${IVYBIN}' />
+	 <fileset dir='${BUBBLES}/lib/' includes='smack*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsyntaxpane.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='gnujpdf.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jmf/**/*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='joscar*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsocks-klea.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='ColorPicker.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='derby*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='postgresql.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='mysql.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='pydev.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='wikitext*.jar' />
+	 <pathelement location='${BUBBLES}/lib/bubblesasm.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/jsapi.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/freetts.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/freetts-jsapi10.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/mbrola.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/en_us.jar' />
+     </path>
+      <path id='test.classpath'>
+	 <pathelement location='${BUBBLES}/java' />
+	 <pathelement location='${IVYBIN}' />
+	 <fileset dir='${BUBBLES}/lib/' includes='smack*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsyntaxpane.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='gnujpdf.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jmf/**/*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='javax.servlet.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='joscar*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsocks-klea.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='ColorPicker.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='derby*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='postgresql.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='mysql.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='pydev.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='wikitext*.jar' />
+	 <pathelement location='${BUBBLES}/lib/bubblesasm.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/jsapi.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/freetts.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/freetts-jsapi10.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/mbrola.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/en_us.jar' />
+      </path>
+      <path id='pybles.classpath'>
+	 <pathelement location='${BUBBLES}/java' />
+	 <pathelement location='${IVYBIN}' />
+	 <fileset dir='${BUBBLES}/lib/' includes='smack*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsyntaxpane.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='gnujpdf.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jmf/**/*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='javax.servlet.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='joscar*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsocks-klea.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='ColorPicker.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='derby*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='postgresql.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='mysql.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='pydev.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='wikitext*.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.text.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.jface.text.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.jface.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.equinox.common.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.core.resources.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.core.jobs.jar' />
+	 <pathelement location='${BUBBLES}/lib/bubblesasm.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/jsapi.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/freetts.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/freetts-jsapi10.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/mbrola.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/en_us.jar' />
+      </path>
+      <path id='nobbles.classpath'>
+	 <pathelement location='${BUBBLES}/java' />
+	 <pathelement location='${IVYBIN}' />
+	 <fileset dir='${BUBBLES}/lib/' includes='smack*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsyntaxpane.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='gnujpdf.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jmf/**/*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='javax.servlet.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='joscar*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsocks-klea.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='ColorPicker.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='derby*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='postgresql.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='mysql.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='caja.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='wikitext*.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.text.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.jface.text.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.jface.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.equinox.common.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.core.resources.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.core.jobs.jar' />
+	 <pathelement location='${BUBBLES}/lib/bubblesasm.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/jsapi.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/freetts.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/freetts-jsapi10.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/mbrola.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/en_us.jar' />
+      </path>
+      <path id='pyblesorig.classpath'>
+	 <pathelement location='${BUBBLES}/java' />
+	 <pathelement location='${IVYBIN}' />
+	 <fileset dir='${BUBBLES}/lib/' includes='smack*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsyntaxpane.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='gnujpdf.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jmf/**/*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='javax.servlet.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='joscar*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsocks-klea.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='ColorPicker.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='derby*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='postgresql.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='mysql.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='pydev.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='wikitext*.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.text.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.jface.text.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.jface.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.equinox.common.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.core.resources.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.core.jobs.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.core.runtime.jar' />
+	 <pathelement location='${BUBBLES}/lib/bubblesasm.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/jsapi.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/freetts.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/freetts-jsapi10.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/mbrola.jar' />
+	 <pathelement location='${BUBBLES}/lib/freetts/en_us.jar' />
+      </path>
+   </target>
+   <available file='/pro/java/linux/jdk1.6/jre/lib/rt.jar' type='file' property='j6'
+       value='/pro/java/linux/jdk1.6/jre/lib/rt.jar' />
+   <available file='/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Classes/classes.jar'
+	type='file' property = 'j6' value='/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Classes/classes.jar' />
+
+
+   <path id='pybles1'>
+      <fileset dir='${BUBBLES}/pybles' includes='**/*' />
+   </path>
+
+   <path id='pybles2'>
+      <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.text.jar' />
+      <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.jface.text.jar' />
+      <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.jface.jar' />
+      <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.equinox.common.jar' />
+      <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.core.resources.jar' />
+      <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.core.jobs.jar' />
+      <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.core.runtime.jar' />
+      <fileset dir='${BUBBLES}/eclipsejar/' includes='pydev.jar' />
+   </path>
+
+   <target name='compile' depends='init'>
+      <javac srcdir='.' destdir='${BUBBLES}/java' source='1.6' target='1.6' debug='on'
+		deprecation='on' includeantruntime='false'
+		bootclasspath='${j6}'>
+	 <classpath refid='bubbles.classpath' />
+      </javac>
+   </target>
+
+   <target name='clean'>
+      <delete dir='${BUBBLES}/java/edu/brown/cs/bubbles/bema' />
+   </target>
+
+   <target name='test' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+      </java>
+   </target>
+
+   <target name='testonly' depends='init'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+      </java>
+   </target>
+
+   <target name='testclime' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <arg value='-w' />
+	 <arg value='/home/spr/Eclipse/workspace2' />
+      </java>
+   </target>
+
+   <target name='testmac' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <arg value='-w' />
+	 <arg value='/Users/spr/Documents/workspace' />
+	 <jvmarg value="-Xmx1024m" />
+      </java>
+   </target>
+
+   <target name='testmac1' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <arg value='-w' />
+	 <arg value='/Users/spr/Documents/workspace' />
+	 <arg value="-m" />
+	 <arg value="BUBBLES_DEBUG_spr" />
+	 <arg value="-WEB" />
+	 <jvmarg value="-Xmx1024m" />
+      </java>
+   </target>
+
+   <target name='testmint' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <jvmarg value="-Dedu.brown.cs.bubbles.MINT=BUBBLES_SPR" />
+      </java>
+   </target>
+
+   <target name='testshape' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <arg value='-w' />
+	 <arg value='/home/spr/Eclipse/testing' />
+	 <jvmarg value="-Xmx1024m" />
+      </java>
+   </target>
+
+   <target name='testdyvise' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <arg value='-w' />
+	 <arg value='/home/spr/Eclipse/workspace2' />
+	 <jvmarg value="-Xmx2048m" />
+      </java>
+   </target>
+
+   <target name='testfindbugs' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <arg value='-w' />
+	 <arg value='/home/spr/Eclipse/findbugs' />
+	 <jvmarg value="-Xmx1024m" />
+      </java>
+   </target>
+
+   <target name='testdebug' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <arg value='-w' />
+	 <arg value='/home/spr/Eclipse/testing' />
+	 <arg value='-Debug' />
+	 <jvmarg value="-Xmx1024m" />
+      </java>
+   </target>
+
+   <target name='testdylti' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <arg value='-w' />
+	 <arg value='/home/spr/Eclipse/testing' />
+	 <jvmarg value="-Xmx1024m" />
+	 <jvmarg value="-agentpath:/pro/dyvise/lib/x86_64/libdylti.so=LOG=locks.csv" />
+	 <jvmarg value="-Xmx1024m" />
+      </java>
+   </target>
+
+   <target name='testfait' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <arg value='-w' />
+	 <arg value='/home/spr/Eclipse/fait' />
+	 <arg value='-m' />
+	 <arg value='BUBBLES_DEBUG_spr' />
+      </java>
+   </target>
+
+   <target name='testvhr' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <arg value='-w' />
+	 <arg value='/home/spr/Eclipse/vhrjava' />
+	 <arg value='-m' />
+	 <arg value='BUBBLES_DEBUG_spr' />
+      </java>
+   </target>
+
+   <target name='testsampler' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <arg value='-w' />
+	 <arg value='/home/spr/Eclipse/sampler' />
+	 <arg value='-m' />
+	 <arg value='BUBBLES_DEBUG_spr' />
+      </java>
+   </target>
+
+   <target name='testdecaf' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <arg value='-w' />
+	 <arg value='/home/spr/Eclipse/decaf' />
+	 <arg value='-m' />
+	 <arg value='BUBBLES_DEBUG_spr1' />
+      </java>
+   </target>
+
+   <target name='testfish' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <arg value='-w' />
+	 <arg value='/home/spr/Eclipse/fishbowl' />
+	 <arg value='-m' />
+	 <arg value='BUBBLES_DEBUG_spr2' />
+      </java>
+   </target>
+
+   <target name='testjoin' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <jvmarg value="-Xmx1024m" />
+	 <arg value="-C" />
+	 <arg value="-m" />
+	 <arg value="BUBBLES_DEBUG_spr" />
+      </java>
+   </target>
+
+   <target name='pybles' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='pybles.classpath' />
+	 <jvmarg value="-Xmx1024m" />
+	 <arg value="-python" />
+	 <arg value="-m" />
+	 <arg value="BUBBLES_DEBUG_spr" />
+      </java>
+   </target>
+
+   <target name='nobbles' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='nobbles.classpath' />
+	 <jvmarg value="-Xmx1024m" />
+	 <arg value="-js" />
+	 <arg value="-m" />
+	 <arg value="NOBBLES_DEBUG_spr" />
+      </java>
+   </target>
+
+   <target name='rebus' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <jvmarg value="-Xmx1024m" />
+	 <arg value="-rebus" />
+	 <arg value="-m" />
+	 <arg value="REBUS_DEBUG_spr" />
+      </java>
+   </target>
+
+   <target name='sudssetup' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <jvmarg value="-Xmx1024m" />
+	 <arg value="-prop" />
+	 <arg value="/u/spr/.sudscsci0150" />
+	 <arg value="-m" />
+	 <arg value="BUBBLES_DEBUG_spr" />
+      </java>
+   </target>
+
+   <target name='tutorial' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <arg value='-w' />
+	 <arg value='/home/spr/Eclipse/tutorial' />
+	 <arg value="-m" />
+	 <arg value="BUBBLES_DEBUG_spr" />
+      </java>
+   </target>
+
+   <target name='testserver' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <jvmarg value="-Xmx1024m" />
+	 <arg value="-S" />
+	 <arg value="-m" />
+	 <arg value="BUBBLES_DEBUG_spr" />
+	 <arg value='-w' />
+	 <arg value='/home/spr/Eclipse/bubblesx' />
+      </java>
+   </target>
+
+   <target name='testserver1' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <jvmarg value="-Xmx1024m" />
+	 <arg value="-S" />
+	 <arg value="-W" />
+	 <arg value="-m" />
+	 <arg value="BUBBLES_DEBUG_spr" />
+	 <arg value='-w' />
+	 <arg value='/home/spr/Eclipse/bubblesx' />
+      </java>
+   </target>
+
+   <target name='testserver2' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <jvmarg value="-Xmx1024m" />
+	 <arg value="-S" />
+	 <arg value="-W" />
+	 <arg value="-m" />
+	 <arg value="BUBBLES_DEBUG_spr" />
+	 <arg value='-w' />
+	 <arg value='/home/spr/Eclipse/workspace2' />
+      </java>
+   </target>
+
+   <target name='testserver3' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <jvmarg value="-Xmx1024m" />
+	 <arg value="-S" />
+	 <arg value="-W" />
+	 <arg value="-m" />
+	 <arg value="BUBBLES_DEBUG_spr" />
+	 <arg value='-w' />
+	 <arg value='/home/spr/Eclipse/sampler' />
+      </java>
+   </target>
+
+   <target name='testserver4' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <jvmarg value="-Xmx1024m" />
+	 <arg value="-S" />
+	 <arg value="-W" />
+	 <arg value="-m" />
+	 <arg value="BUBBLES_DEBUG_spr" />
+	 <arg value='-w' />
+	 <arg value='/home/spr/Eclipse/twitter' />
+      </java>
+   </target>
+
+   <target name='testserver5' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <jvmarg value="-Xmx1024m" />
+	 <arg value="-S" />
+	 <arg value="-W" />
+	 <arg value="-m" />
+	 <arg value="BUBBLES_DEBUG_spr" />
+	 <arg value='-w' />
+	 <arg value='/home/spr/Eclipse/upod' />
+      </java>
+   </target>
+
+   <target name='testserver6' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.bema.BemaMain' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <jvmarg value="-Xmx1024m" />
+	 <arg value="-S" />
+	 <arg value="-W" />
+	 <arg value="-m" />
+	 <arg value="BUBBLES_DEBUG_spr" />
+	 <arg value='-w' />
+	 <arg value='/home/spr/Eclipse/roamio' />
+      </java>
+   </target>
+
+   <target name='javajar' depends='compile'>
+      <jar destfile="bubbles.jar" manifest='manifest.mf'>
+	 <fileset dir='${IVYJAR1}' includes= '${IVYJAR2}' />
+	 <fileset dir='${BUBBLES}/java' includes= '**/*.class' />
+	 <fileset dir='${BUBBLES}/lib' includes='*.props' />
+	 <fileset dir='${BUBBLES}/lib' includes='bedrock.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='ivy.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='version.xml' />
+	 <fileset dir='${BUBBLES}/lib/' includes='gnujpdf.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsyntaxpane.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='smack*.jar' />
+	 <fileset dir='${BUBBLES}/lib/templates' includes='*.template' />
+	 <fileset dir='${BUBBLES}/' includes='lib/helpdoc.xml' />
+	 <fileset dir='${BUBBLES}/' includes='lib/helpdomos.xml' />
+	 <fileset dir='${BUBBLES}/' includes='lib/preferences.new.xml' />
+	 <fileset dir='${BUBBLES}/lib/' includes='mouseusage.html' />
+	 <fileset dir='${BUBBLES}/lib/' includes='helptext.html' />
+	 <fileset dir='${BUBBLES}' includes='images/**/*.png' />
+	 <fileset dir='${BUBBLES}/lib' includes='bubblesasm.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='bandaid.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='batt*.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='javax.servlet.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='LagHunter*.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='LiLaConfiguration.ini' />
+	 <fileset dir='${BUBBLES}/lib/' includes='joscar*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsocks-klea.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='ColorPicker.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='junit.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='copyright.txt' />
+	 <fileset dir='${BUBBLES}/lib/' includes='bbookbkg.gif' />
+	 <fileset dir='${BUBBLES}/lib/' includes='keybindings.csv' />
+	 <fileset dir='${BUBBLES}/lib/' includes='derby*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='postgresql.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='mysql.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='wikitext*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='cofoja.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='pydev.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsoup.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='asm4.jar' />
+      </jar>
+      <copy file='bubbles.jar' tofile='${BUBBLES}/bubbles.jar' />
+   </target>
+
+   <target name='jar' depends='compile,plist'>
+      <jar destfile="bubbles.jar" manifest='manifest.mf'>
+	 <fileset dir='${IVYJAR1}' includes= '${IVYJAR2}' />
+	 <fileset dir='${BUBBLES}/java' includes= '**/*.class' />
+	 <fileset dir='${BUBBLES}/lib' includes='*.props' />
+	 <fileset dir='${BUBBLES}/lib' includes='bedrock.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='ivy.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='version.xml' />
+	 <fileset dir='${BUBBLES}/lib' includes='rebusprops.xml' />
+	 <fileset dir='${BUBBLES}/lib/' includes='gnujpdf.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsyntaxpane.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='smack*.jar' />
+	 <fileset dir='${BUBBLES}/lib/templates' includes='*.template' />
+	 <fileset dir='${BUBBLES}/' includes='lib/helpdoc.xml' />
+	 <fileset dir='${BUBBLES}/' includes='lib/helpdemos.xml' />
+	 <fileset dir='${BUBBLES}/' includes='lib/preferences.new.xml' />
+	 <fileset dir='${BUBBLES}/lib/' includes='mouseusage.html' />
+	 <fileset dir='${BUBBLES}/lib/' includes='helptext.html' />
+	 <fileset dir='${BUBBLES}' includes='images/**/*.png' />
+	 <fileset dir='${BUBBLES}/lib' includes='bubblesasm.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='bandaid.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='batt*.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='javax.servlet.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='LagHunter*.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='LiLaConfiguration.ini' />
+	 <fileset dir='${BUBBLES}/lib/' includes='joscar*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsocks-klea.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='ColorPicker.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='junit.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='copyright.txt' />
+	 <fileset dir='${BUBBLES}/lib/' includes='bbookbkg.gif' />
+	 <fileset dir='${BUBBLES}/lib/' includes='keybindings.csv' />
+	 <fileset dir='${BUBBLES}/lib/' includes='derby*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='postgresql.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='mysql.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='wikitext*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='cofoja.jar' />
+	 <fileset dir='${BUBBLES}/pybles' includes='**/*' />
+	 <fileset dir='${BUBBLES}/lib/' includes='pydev.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsoup.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='asm4.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.text.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.jface.text.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.jface.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.equinox.common.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.core.resources.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.core.jobs.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.core.runtime.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.core.contenttype.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.osgi.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.jdt.core.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='org.eclipse.equinox.preferences.jar' />
+	 <fileset dir='${BUBBLES}/eclipsejar/' includes='pydev.jar' />
+	 <fileset dir='.' includes='pyblesfiles.txt' />
+	 <fileset dir='${BUBBLES}/lib' includes='rebusprops.xml' />
+      </jar>
+      <copy file='bubbles.jar' tofile='${BUBBLES}/bubbles.jar' />
+      <copy file='bubbles.jar' tofile='${BUBBLES}/suds/bubbles.jar' />
+   </target>
+
+   <target name='nextversion' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.board.BoardUpdate' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <assertions><enable/></assertions>
+	 <arg value='-version' />
+      </java>
+      <antcall target='jar' />
+      <copy file='bubbles.jar' tofile='${BUBBLES}/bubbles.jar' />
+      <copy file='bubbles.jar' tofile='/pro/web/web/people/spr/bubbles/bubbles.jar' />
+      <copy file='${BUBBLES}/lib/version.xml' tofile='/pro/web/web/people/spr/bubbles/version.xml' />
+      <exec executable='sendupdate.csh' />
+   </target>
+
+   <target name='minorversion' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.board.BoardUpdate' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <assertions><enable/></assertions>
+	 <arg value='-version' />
+      </java>
+      <antcall target='jar' />
+      <copy file='bubbles.jar' tofile='${BUBBLES}/bubbles.jar' />
+      <copy file='bubbles.jar' tofile='/pro/web/web/people/spr/bubbles/bubbles.jar' />
+      <copy file='${BUBBLES}/lib/version.xml' tofile='/pro/web/web/people/spr/bubbles/version.xml' />
+   </target>
+
+   <target name='external' depends='compile'>
+      <mkdir dir="external" />
+      <copy file='${BUBBLES}/lib/version.xml' tofile='external/version.xml' />
+      <replace file='external/version.xml' token='spr/bubbles' value='spr/bubbles.ext' />
+      <antcall target='jar' />
+      <copy file='bubbles.jar' tofile='external/bubbles.jar' />
+      <copy file='external/bubbles.jar' tofile='/pro/web/web/people/spr/bubbles.ext/bubbles.jar' />
+      <copy file='external/version.xml' tofile='/pro/web/web/people/spr/bubbles.ext/version.xml' />
+      <exec executable='sendupdateext.csh' />
+      <delete dir='external' />
+   </target>
+
+   <target name='nextversion1' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.board.BoardUpdate' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <assertions><enable/></assertions>
+	 <arg value='-version' />
+      </java>
+      <jar destfile="bubbles.jar" manifest='manifest.mf'>
+	 <fileset dir='${IVYJAR1}' includes= '${IVYJAR2}' />
+	 <fileset dir='${BUBBLES}/java' includes= '**/*.class' />
+	 <fileset dir='${BUBBLES}/lib' includes='*.props' />
+	 <fileset dir='${BUBBLES}/lib' includes='bedrock.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='ivy.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='version.xml' />
+	 <fileset dir='${BUBBLES}/lib/' includes='gnujpdf.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsyntaxpane.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='smack*.jar' />
+	 <fileset dir='${BUBBLES}/lib/templates' includes='*.template' />
+	 <fileset dir='${BUBBLES}/' includes='lib/helpdoc.xml' />
+	 <fileset dir='${BUBBLES}/' includes='lib/helpdemos.xml' />
+	 <fileset dir='${BUBBLES}/' includes='lib/preferences.new.xml' />
+	 <fileset dir='${BUBBLES}/lib/' includes='mouseusage.html' />
+	 <fileset dir='${BUBBLES}/lib/' includes='helptext.html' />
+	 <fileset dir='${BUBBLES}' includes='images/**/*.png' />
+	 <fileset dir='${BUBBLES}/lib' includes='bubblesasm.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='bandaid.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='batt*.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='javax.servlet.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='LagHunter*.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='LiLaConfiguration.ini' />
+	 <fileset dir='${BUBBLES}/lib/' includes='joscar*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsocks-klea.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='ColorPicker.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='junit.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='copyright.txt' />
+	 <fileset dir='${BUBBLES}/lib/' includes='bbookbkg.gif' />
+	 <fileset dir='${BUBBLES}/lib/' includes='keybindings.csv' />
+	 <fileset dir='${BUBBLES}/lib/' includes='derby*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='postgresql.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='mysql.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='wikitext*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='cofoja.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsoup.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='asm4.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='rebusprops.xml' />
+      </jar>
+      <copy file='bubbles.jar' tofile='${BUBBLES}/bubbles.jar' />
+      <copy file='bubbles.jar' tofile='/pro/web/web/people/spr/bubbles/bubbles.jar' />
+      <copy file='${BUBBLES}/lib/version.xml' tofile='/pro/web/web/people/spr/bubbles/version.xml' />
+      <exec executable='sendupdate.csh' />
+   </target>
+
+   <target name='minorversion1' depends='compile'>
+      <java classname='edu.brown.cs.bubbles.board.BoardUpdate' fork='true'>
+	 <classpath refid='test.classpath' />
+	 <assertions><enable/></assertions>
+	 <arg value='-version' />
+      </java>
+      <jar destfile="bubbles.jar" manifest='manifest.mf'>
+	 <fileset dir='${IVYJAR1}' includes= '${IVYJAR2}' />
+	 <fileset dir='${BUBBLES}/java' includes= '**/*.class' />
+	 <fileset dir='${BUBBLES}/lib' includes='*.props' />
+	 <fileset dir='${BUBBLES}/lib' includes='bedrock.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='ivy.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='version.xml' />
+	 <fileset dir='${BUBBLES}/lib/' includes='gnujpdf.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsyntaxpane.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='smack*.jar' />
+	 <fileset dir='${BUBBLES}/lib/templates' includes='*.template' />
+	 <fileset dir='${BUBBLES}/' includes='lib/helpdoc.xml' />
+	 <fileset dir='${BUBBLES}/' includes='lib/helpdemos.xml' />
+	 <fileset dir='${BUBBLES}/' includes='lib/preferences.new.xml' />
+	 <fileset dir='${BUBBLES}/lib/' includes='mouseusage.html' />
+	 <fileset dir='${BUBBLES}/lib/' includes='helptext.html' />
+	 <fileset dir='${BUBBLES}' includes='images/**/*.png' />
+	 <fileset dir='${BUBBLES}/lib' includes='bubblesasm.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='bandaid.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='batt*.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='javax.servlet.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='LagHunter*.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='LiLaConfiguration.ini' />
+	 <fileset dir='${BUBBLES}/lib/' includes='joscar*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsocks-klea.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='ColorPicker.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='junit.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='copyright.txt' />
+	 <fileset dir='${BUBBLES}/lib/' includes='bbookbkg.gif' />
+	 <fileset dir='${BUBBLES}/lib/' includes='keybindings.csv' />
+	 <fileset dir='${BUBBLES}/lib/' includes='derby*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='postgresql.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='mysql.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='wikitext*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='cofoja.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsoup.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='asm4.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='rebusprops.xml' />
+      </jar>
+      <copy file='bubbles.jar' tofile='${BUBBLES}/bubbles.jar' />
+      <copy file='bubbles.jar' tofile='/pro/web/web/people/spr/bubbles/bubbles.jar' />
+      <copy file='${BUBBLES}/lib/version.xml' tofile='/pro/web/web/people/spr/bubbles/version.xml' />
+   </target>
+
+   <target name='external1' depends='compile'>
+      <mkdir dir="external" />
+      <copy file='${BUBBLES}/lib/version.xml' tofile='external/version.xml' />
+      <replace file='external/version.xml' token='spr/bubbles' value='spr/bubbles.ext' />
+      <jar destfile="external/bubbles.jar" manifest='manifest.mf'>
+	 <fileset dir='${IVYJAR1}' includes= '${IVYJAR2}' />
+	 <fileset dir='${BUBBLES}/java' includes= '**/*.class' />
+	 <fileset dir='${BUBBLES}/lib' includes='*.props' />
+	 <fileset dir='${BUBBLES}/lib' includes='bedrock.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='ivy.jar' />
+	 <fileset dir='external' includes='version.xml' />
+	 <fileset dir='${BUBBLES}/lib/' includes='gnujpdf.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsyntaxpane.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='smack*.jar' />
+	 <fileset dir='${BUBBLES}/lib/templates' includes='*.template' />
+	 <fileset dir='${BUBBLES}/' includes='lib/helpdoc.xml' />
+	 <fileset dir='${BUBBLES}/' includes='lib/helpdemos.xml' />
+	 <fileset dir='${BUBBLES}/' includes='lib/preferences.new.xml' />
+	 <fileset dir='${BUBBLES}/lib/' includes='mouseusage.html' />
+	 <fileset dir='${BUBBLES}/lib/' includes='helptext.html' />
+	 <fileset dir='${BUBBLES}' includes='images/**/*.png' />
+	 <fileset dir='${BUBBLES}/lib' includes='bubblesasm.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='bandaid.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='batt*.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='javax.servlet.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='LagHunter*.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='LiLaConfiguration.ini' />
+	 <fileset dir='${BUBBLES}/lib/' includes='joscar*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsocks-klea.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='ColorPicker.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='junit.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='copyright.txt' />
+	 <fileset dir='${BUBBLES}/lib/' includes='bbookbkg.gif' />
+	 <fileset dir='${BUBBLES}/lib/' includes='keybindings.csv' />
+	 <fileset dir='${BUBBLES}/lib/' includes='derby*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='postgresql.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='mysql.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='wikitext*.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='cofoja.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='jsoup.jar' />
+	 <fileset dir='${BUBBLES}/lib/' includes='asm4.jar' />
+	 <fileset dir='${BUBBLES}/lib' includes='rebusprops.xml' />
+      </jar>
+      <copy file='external/bubbles.jar' tofile='/pro/web/web/people/spr/bubbles.ext/bubbles.jar' />
+      <copy file='external/version.xml' tofile='/pro/web/web/people/spr/bubbles.ext/version.xml' />
+      <exec executable='sendupdateext.csh' />
+      <delete dir='external' />
+   </target>
+
+   <target name='plist' depends='init'>
+       <exec executable='echo' output='pyblesfiles.txt' >
+	  <arg path='${BUBBLES}/pybles' />
+	  <arg path='${BUBBLES}/eclipsejar' />
+       </exec>
+       <exec executable='echo' output='pyblesfiles.txt' append='true' >
+	  <arg pathref='pybles1' />
+       </exec>
+       <exec executable='echo' output='pyblesfiles.txt' append='true' >
+	  <arg pathref='pybles2' />
+       </exec>
+   </target>
+
+</project>
+
+
+

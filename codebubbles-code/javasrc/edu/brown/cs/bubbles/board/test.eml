@@ -1,0 +1,33 @@
+From spr@pit.cs.brown.edu  Thu May 20 08:34:27 2010
+Message-ID: <4BF52C52.5000907@cs.brown.edu>
+Date: Thu, 20 May 2010 08:34:26 -0400
+From: Steve Reiss <spr@cs.brown.edu>
+User-Agent: Mozilla-Thunderbird 2.0.0.24 (X11/20100329)
+MIME-Version: 1.0
+To: Steve Reiss <spr@cs.brown.edu>
+Subject: sub
+Content-Type: multipart/mixed;
+ boundary="------------060900050201030405060805"
+X-UID: 3180
+Status: R
+X-Keywords:									
+Content-Length: 394
+
+This is a multi-part message in MIME format.
+--------------060900050201030405060805
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+
+test message
+
+--------------060900050201030405060805
+Content-Type: text/xml;
+ name="test.xml"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+ filename="test.xml"
+
+<XMLTEST />
+
+--------------060900050201030405060805--
+
