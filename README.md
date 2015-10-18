@@ -10,6 +10,6 @@ This repository _is not_ the original repository for this tool. Here are some li
 
 In this repository, for Code Bubbles you will find:
 * :white_check_mark: Source code (available)
-* :white_check_mark: [The original tool](SomeExecutableInTheRepo) (available)
+* :white_check_mark: [The original tool](http://cs.brown.edu/~spr/codebubbles/) (available)
 
 This repository was constructed by [Mohan Sammeta](https://github.com/mohansammeta) under the supervision of [Emerson Murphy-Hill](https://github.com/CaptainEmerson). Thanks to Steven P. Reiss, Jared N. Bott and Joseph J. LaViola Jr. for their help in establishing this repository. 
