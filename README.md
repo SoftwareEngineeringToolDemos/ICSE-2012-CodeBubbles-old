@@ -6,6 +6,7 @@ This repository contains information related to the tool Code Bubbles. The tool 
 
 This repository _is not_ the original repository for this tool. Here are some links to the original project:
 * [The Official Project Page, including source code](http://cs.brown.edu/people/spr/codebubbles/)
+* [Original Download Link](http://cs.brown.edu/people/spr/codebubbles/)
 * [A Video of the Tool](http://cs.brown.edu/people/spr/codebubbles/demovideo.mov)
 
 In this repository, for Code Bubbles you will find:
